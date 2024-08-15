@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 @page "/"
-@rendermode InteractiveServer
 
 <head>
 	<Navbar />
@@ -30,8 +29,14 @@
 		</div>
 	</section>
 
-	<p> Nome da empregada :  <input @bind="newMaid" /></p>
-	<button @onclick="AdicionarMaid"  class="button is-large is-fullwidth is-success"> Adicionar Empregada  </button>
+	<p> Nome da empregada :  <input @bind="newNameMaid" /></p>
+	<p> Localização da empregada :  <input @bind="newAddressMaid" /></p>
+	<p> Reputação da empregada :  <input @bind="newReputationMaid" /></p>
+	<p> Telefone da empregada :  <input @bind="newTelefoneMaid" /></p>
+	<p> Email da empregada :  <input @bind="newEmailMaid" /></p>
+
+
+	<button @onclick="AdicionarMaid" class="button is-large is-fullwidth is-success"> Adicionar Empregada  </button>
 
 </div>
 
@@ -42,43 +47,51 @@
 <div class="columns is-centered">
 
 	<div class="column is-one-fifth">
-		
-	
+		<p> Lista das empregadas </p>
+
+		@foreach (var maid in maids)
+		{
+			//<li>@maid.Maidid</li>
+			<li>
+				<h1>@maid.Nome</h1>
+				<h1>@maid.Address</h1>
+				<h1>@maid.Reputation</h1>
+				<h1>@maid.Telefone</h1>
+				<h1>@maid.Email</h1>
+
+
+			</li>
+
+		}
+
 		<Galery />
 	</div>
 </div>
 
 
-<ul>
-	<p> Lista das empregadas </p>
-
-	@foreach (var maid in maids)
-	{
-		//<li>@maid.Maidid</li>
-		<li>
-			<h1>@maid.Nome</h1>
-			<input @bind="maid.Nome" />
-
-			
-		</li>
-		//<li>@maid.Address</li>
-		//<li>@maid.Reputation</li>
-		//<li>@maid.Telefone</li>
-		//<li>@maid.Email</li>
-	}
-</ul>
-
 @code {
 	private List<AddMaid> maids = new();
-	string newMaid = "";
+	string newNameMaid = "";
+	string newAddressMaid = "";
+	int newReputationMaid = 0;
+	string newTelefoneMaid = "";
+	string newEmailMaid = "";
+
+
 
 	void AdicionarMaid()
 	{
-		if (!string.IsNullOrWhiteSpace(newMaid))
-		{
-			maids.Add(new AddMaid { Nome =  newMaid});
-			newMaid = string.Empty;
-		}
+		maids.Add(new AddMaid
+			{
+				Nome = newNameMaid,
+				Address = newAddressMaid,
+				Reputation = newReputationMaid,
+				Telefone = newTelefoneMaid,
+				Email = newEmailMaid,
+			});
+
+		newNameMaid = string.Empty;
+		newAddressMaid = string.Empty;
 	}
 
 }
