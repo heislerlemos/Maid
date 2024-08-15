@@ -1,14 +1,12 @@
 ﻿@inherits LayoutComponentBase
 @page "/"
 
-<head>
+
+
+<div class="container">
+
 	<Navbar />
 
-</head>
-
-
-<br />
-<div class="container">
 
 	<section class="hero is-link">
 		<div class="hero-body">
@@ -29,51 +27,79 @@
 		</div>
 	</section>
 
-	<p> Nome da empregada :  <input @bind="newNameMaid" /></p>
-	<p> Localização da empregada :  <input @bind="newAddressMaid" /></p>
-	<p> Reputação da empregada :  <input @bind="newReputationMaid" /></p>
-	<p> Telefone da empregada :  <input @bind="newTelefoneMaid" /></p>
-	<p> Email da empregada :  <input @bind="newEmailMaid" /></p>
+	<section class="hero is-link">
+		<div class="hero-body">
+
+			<p> Nome da empregada :  <input class="input is-info is-large" @bind="newNameMaid" /></p>
+			<p> Localização da empregada :  <input class="input is-info" @bind="newAddressMaid" /></p>
+			<p> Idade da empregada :  <input class="input is-info" @bind="newIdadeMaid" /></p>
+			<p> Telefone da empregada :  <input class="input is-info" @bind="newTelefoneMaid" /></p>
+			<p> Email da empregada :  <input class="input is-info" @bind="newEmailMaid" /></p>
+
+		</div>
+	</section>
 
 
 	<button @onclick="AdicionarMaid" class="button is-large is-fullwidth is-success"> Adicionar Empregada  </button>
 
-</div>
 
-<br />
-<br />
+	<br />
+	<br />
+	<p> Lista das empregadas </p>
 
+	<div class="columns is-centered is-multiline">
 
-<div class="columns is-centered">
-
-	<div class="column is-one-fifth">
-		<p> Lista das empregadas </p>
 
 		@foreach (var maid in maids)
 		{
-			//<li>@maid.Maidid</li>
-			<li>
-				<h1>@maid.Nome</h1>
-				<h1>@maid.Address</h1>
-				<h1>@maid.Reputation</h1>
-				<h1>@maid.Telefone</h1>
-				<h1>@maid.Email</h1>
+
+			<div class="column is-one-fifth">
 
 
-			</li>
 
+				<div class="card">
+					<div class="card-image">
+						<figure class="image is-4by3">
+							<img src="https://merecrute.com/wp-content/uploads/2017/05/empregada-domestica.jpg"
+								 alt="Placeholder image" />
+						</figure>
+					</div>
+					<div class="card-content">
+						<div class="media">
+							<div class="media-left">
+								<figure class="image is-48x48">
+									<img src="https://th.bing.com/th/id/R.33458f35eae57777801d9239a238e6b6?rik=Bun11gPCN5Tk%2fw&riu=http%3a%2f%2fwww.emergingrnleader.com%2fwp-content%2fuploads%2f2016%2f08%2fFive-Stars.jpg&ehk=OXu47Z79cJv%2fM%2bkBCs%2bRPdl8k2yDu%2bqlY%2bVpcVpU5Y4%3d&risl=&pid=ImgRaw&r=0"
+										 alt="Placeholder image" />
+								</figure>
+							</div>
+							<div class="media-content">
+								<p>Nome : @maid.Nome</p>
+								<p>Idade: @maid.Idade</p>
+								<p>Morada : @maid.Address</p>
+								<p>Email : @maid.Email</p>
+							</div>
+						</div>
+
+						<div class="content">
+							5 Anos de Experiencia
+
+							<br />
+							<time datetime="2016-1-1">Numero de telefone : @maid.Telefone</time>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		}
 
-		<Galery />
 	</div>
 </div>
-
 
 @code {
 	private List<AddMaid> maids = new();
 	string newNameMaid = "";
 	string newAddressMaid = "";
-	int newReputationMaid = 0;
+	int newIdadeMaid = 0;
 	string newTelefoneMaid = "";
 	string newEmailMaid = "";
 
@@ -85,7 +111,7 @@
 			{
 				Nome = newNameMaid,
 				Address = newAddressMaid,
-				Reputation = newReputationMaid,
+				Idade = newIdadeMaid,
 				Telefone = newTelefoneMaid,
 				Email = newEmailMaid,
 			});
